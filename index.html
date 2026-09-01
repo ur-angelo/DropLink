@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>D</title>
+    <script>t='DropLink (by angelo x)';i=0;d=1;setInterval(_=>{document.title=t.slice(0,i+=d);if(!i||i==t.length)d=-d},150)</script>
+    <link href="assets/icon.png" rel="shortcut icon" type="image/x-icon"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        ::-webkit-scrollbar {
+            display: none;
+            width: 0;
+            height: 0;
+        }
+
+        html, body {
+            width: 100%;
+            min-height: 100vh;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        body {
+            min-height: 100vh;
+            background-color: #080510;
+            color: white;
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+            overflow-y: auto;
+            padding: 20px 0;
+            background-image:
+                linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+            background-size: 45px 45px;
+        }
+
+        .wave {
+            position: absolute;
+            top: -200px;
+            left: -10%;
+            width: 120%;
+            height: 480px;
+            background: linear-gradient(110deg, #25004d, #7000ff, #a855f7, #7000ff, #25004d);
+            filter: blur(40px);
+            opacity: 0.65;
+            border-radius: 0 0 50% 50%;
+            animation: waveMove 7s ease-in-out infinite alternate;
+            z-index: 1;
+        }
+
+        @keyframes waveMove {
+            0% { transform: translateX(-4%) rotate(-2deg); }
+            100% { transform: translateX(2%) rotate(2deg); }
+        }
+
+        .container {
+            position: relative;
+            z-index: 5;
+            text-align: center;
+            max-width: 750px;
+            width: 90%;
+            padding: 20px;
+            animation: fadeIn 1s ease;
+        }
+
+        .title {
+            font-size: clamp(2.2rem, 6vw, 3.25rem);
+            font-weight: 800;
+            letter-spacing: 1px;
+            margin-bottom: 6px;
+            text-shadow: 0 0 15px #7000ff, 0 0 35px rgba(112, 0, 255, 0.6);
+        }
+
+        .author-link {
+            display: inline-block;
+            font-size: clamp(13px, 2vw, 15px);
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: none;
+            margin-bottom: 30px;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        .author-link span {
+            color: #a855f7;
+            font-weight: 600;
+        }
+
+        .author-link:hover {
+            color: #ffffff;
+            transform: translateY(-2px);
+        }
+
+        .author-link:hover span {
+            color: #c084fc;
+            text-shadow: 0 0 10px rgba(168, 85, 247, 0.8);
+        }
+
+        .preview-card {
+            background: rgba(18, 12, 33, 0.7);
+            border: 1px solid rgba(112, 0, 255, 0.3);
+            border-radius: 18px;
+            padding: 12px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6), 0 0 25px rgba(112, 0, 255, 0.25);
+            backdrop-filter: blur(10px);
+            margin-bottom: 35px;
+            perspective: 1000px;
+            max-width: 100%;
+            height: auto;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .preview-card:hover {
+            border-color: rgba(168, 85, 247, 0.7);
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.7), 0 0 35px rgba(168, 85, 247, 0.4);
+        }
+
+        .preview-card img {
+            width: 100%;
+            max-width: 100%;
+            height: auto;
+            border-radius: 12px;
+            display: block;
+            pointer-events: none;
+            transition: transform 0.15s ease-out;
+            transform-style: preserve-3d;
+        }
+
+        .download-area {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 40px;
+            width: 100%;
+        }
+
+        .btn-download {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px 40px;
+            max-width: 100%;
+            color: #ffffff;
+            text-decoration: none;
+            font-size: clamp(15px, 2.5vw, 18px);
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            background: linear-gradient(135deg, #7000ff 0%, #9333ea 50%, #a855f7 100%);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            border-radius: 14px;
+            box-shadow: 0 0 25px rgba(112, 0, 255, 0.55), 0 10px 20px rgba(0, 0, 0, 0.4);
+            cursor: pointer;
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .btn-download::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .btn-download:hover::before {
+            left: 100%;
+        }
+
+        .btn-download:hover {
+            transform: translateY(-4px) scale(1.04);
+            box-shadow: 0 0 35px rgba(168, 85, 247, 0.85), 0 15px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .btn-download:active {
+            transform: translateY(-1px) scale(0.98);
+        }
+
+        .release {
+            font-size: clamp(12px, 2vw, 14px);
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        #countdown {
+            font-weight: 700;
+            color: #a855f7;
+            text-shadow: 0 0 8px rgba(168, 85, 247, 0.6);
+        }
+
+        .description-box {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            padding: 25px 30px;
+            text-align: left;
+            backdrop-filter: blur(5px);
+            width: 100%;
+        }
+
+        .description-box h2 {
+            font-size: clamp(16px, 3vw, 20px);
+            font-weight: 700;
+            color: #a855f7;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .description-box p {
+            font-size: clamp(13px, 2vw, 14px);
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.75);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 600px) {
+            .btn-download { width: 100%; padding: 16px 0; }
+            .description-box { padding: 20px; }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wave"></div>
+
+    <div class="container">
+        <h1 class="title">DropLink</h1>
+
+        <a href="https://guns.lol/angelo_x" target="_blank" class="author-link">
+            Made by <span>@angelo x</span>
+        </a>
+
+        <div class="preview-card" id="cardContainer">
+            <img src="assets/image.png" id="previewImg" alt="DropLink Interface">
+        </div>
+
+        <div id="downloadArea" class="download-area"></div>
+
+        <div class="description-box">
+            <h2>⚡ How DropLink Works</h2>
+            <p>
+                DropLink allows you to instantly transfer files, folders, and subfolders between devices on the same local network (IP connection). Simply drag and drop your items to share them seamlessly at high speeds with zero setup required.
+            </p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("contextmenu", e => e.preventDefault());
+        document.addEventListener("keydown", e => {
+            if (e.key === "F12" || (e.ctrlKey && e.shiftKey && ["I","C","J"].includes(e.key.toUpperCase())) || (e.ctrlKey && e.key.toLowerCase() === "u")) {
+                e.preventDefault();
+            }
+        });
+
+        const card = document.getElementById("cardContainer");
+        const img = document.getElementById("previewImg");
+
+        card.addEventListener("mousemove", (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left - rect.width / 2;
+            const y = e.clientY - rect.top - rect.height / 2;
+            
+            const rotateX = (-y / rect.height) * 20;
+            const rotateY = (x / rect.width) * 20;
+
+            img.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.03)`;
+        });
+
+        card.addEventListener("mouseleave", () => {
+            img.style.transform = "rotateX(0deg) rotateY(0deg) scale(1)";
+        });
+
+        const downloadUrl = "https://github.com/ur-angelo/DropLink/releases/download/DropLink/DropLink.exe"; 
+
+        const COUNTDOWN_TIME = 24 * 60 * 60 * 1000;
+        const countdownKey = "droplink_release_time";
+        const downloadArea = document.getElementById("downloadArea");
+
+        if (typeof downloadUrl === "string" && downloadUrl.trim().length > 0) {
+            const downloadButton = document.createElement("div");
+            downloadButton.className = "btn-download";
+            downloadButton.textContent = "Download DropLink";
+            downloadButton.addEventListener("click", () => {
+                window.location.href = downloadUrl.trim();
+            });
+            downloadArea.appendChild(downloadButton);    
+        } else {
+            const soonButton = document.createElement("div");
+            soonButton.className = "btn-download";
+            soonButton.textContent = "Coming Soon";
+            downloadArea.appendChild(soonButton);
+
+            const releaseText = document.createElement("div");
+            releaseText.className = "release";
+            releaseText.innerHTML = 'Available within <span id="countdown">24:00:00</span>';
+            downloadArea.appendChild(releaseText);
+
+            let endTime = localStorage.getItem(countdownKey);
+            if (!endTime) {
+                endTime = Date.now() + COUNTDOWN_TIME;
+                localStorage.setItem(countdownKey, endTime);
+            }
+            endTime = Number(endTime);
+
+            function updateCountdown() {
+                const now = Date.now();
+                let remaining = endTime - now;
+                if (remaining <= 0) {
+                    document.getElementById("countdown").textContent = "00:00:00";
+                    releaseText.innerHTML = "Available Now!";
+                    return;
+                }
+                const h = String(Math.floor(remaining / (1000 * 60 * 60))).padStart(2, "0");
+                const m = String(Math.floor((remaining % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, "0");
+                const s = String(Math.floor((remaining % (1000 * 60)) / 1000)).padStart(2, "0");
+                document.getElementById("countdown").textContent = `${h}:${m}:${s}`;
+            }
+            updateCountdown();
+            setInterval(updateCountdown, 1000);
+        }
+    </script>
+</body>
+</html>
