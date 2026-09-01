@@ -214,7 +214,15 @@
             backdrop-filter: blur(5px);
             width: 100%;
         }
-
+        /* إخفاء شعار وشريط Netlify نهائياً */
+#netlify-badge,
+iframe[src*="netlify"],
+netlify-drawer,
+#netlify-toolbar,
+[class*="netlify"] {
+    display: none !important;
+    visibility: hidden !important;
+}
         .description-box h2 {
             font-size: clamp(16px, 3vw, 20px);
             font-weight: 700;
